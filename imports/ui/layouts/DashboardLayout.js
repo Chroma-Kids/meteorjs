@@ -1,11 +1,11 @@
 import React from 'react';
-import { PrivateHeaderContainer as PrivateHeader } from '../PrivateHeader';
+import { HeaderContainer as Header } from '../Header';
 
 export class DashboardLayout extends React.Component {
   render() {
     return (
       <div>
-        <PrivateHeader title="Meteor Boilerplate" />
+        <Header title="Meteor Boilerplate" />
         <div className="page-content">
           {this.props.children}
         </div>

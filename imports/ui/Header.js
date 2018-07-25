@@ -3,7 +3,7 @@ import { Accounts } from 'meteor/accounts-base';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 
-export class PrivateHeader extends React.Component {
+export class Header extends React.Component {
   render() {
     const { title, handleLogout } = this.props;
     return (
@@ -17,13 +17,13 @@ export class PrivateHeader extends React.Component {
   }
 }
 
-PrivateHeader.propTypes = {
+Header.propTypes = {
   title: PropTypes.string.isRequired,
   handleLogout: PropTypes.func.isRequired,
 };
 
-export const PrivateHeaderContainer = withTracker(() => {
+export const HeaderContainer = withTracker(() => {
   return {
     handleLogout: () => Accounts.logout(),
   };
-})(PrivateHeader);
+})(Header);
