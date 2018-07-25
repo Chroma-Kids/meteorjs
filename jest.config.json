@@ -1,0 +1,9 @@
+{
+  "setupTestFrameworkScriptFile": "<rootDir>/imports/config/jest/setupTestFramework.js",
+  "moduleNameMapper": {
+    "^meteor/(.*)": "<rootDir>/imports/config/jest/.meteorMocks/index.js"
+  },
+  "transform": {
+    "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest"
+  }
+}
