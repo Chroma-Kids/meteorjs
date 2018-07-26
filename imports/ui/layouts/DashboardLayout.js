@@ -5,7 +5,7 @@ export class DashboardLayout extends React.Component {
   render() {
     return (
       <div>
-        <Header title="Meteor Boilerplate" />
+        <Header title="Chroma Kids" />
         <div className="page-content">
           {this.props.children}
         </div>

@@ -1,9 +1,10 @@
 import React from 'react';
 
-export const Dashboard = () => {
+export class Dashboard extends React.Component {
+  render() {
   return (
     <div>
-      Dashboard page content.
     </div>
   );
+}
 }
