@@ -5,6 +5,20 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Students } from '../../api/students';
 import { AddStudentContainer as AddStudent } from './AddStudent';
 import { Modal } from '../common/Modal';
+import ReactTable from "react-table";
+
+import 'react-table/react-table.css';
+
+const columns = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName'
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName'
+  }
+];
 
 export class StudentsPage extends React.Component {
 
@@ -21,7 +35,10 @@ export class StudentsPage extends React.Component {
           <AddStudent />
         </Modal>
         <div>
-          {students.map(student => <p key={student._id}>{`${student.firstName} ${student.lastName}`}</p>)}
+          <ReactTable
+            data={students}
+            columns={columns}
+          />
         </div>
       </div>
     );
@@ -36,7 +53,7 @@ StudentsPage.propTypes = {
 export const StudentsPageContainer = withTracker(() => {
   const handle = Meteor.subscribe('students.all');
   return {
-    students: Students.find({}, { sort: { firstName: -1 } }).fetch(),
+    students: Students.find({}, { sort: { firstName: 1 } }).fetch(),
     loading: !handle.ready(),
   };
 })(StudentsPage);

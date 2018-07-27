@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-final-form';
-import { StudentForm, validate } from './StudentForm';
 import { withTracker } from 'meteor/react-meteor-data';
+import { StudentForm, validate } from './StudentForm';
 
 export class AddStudent extends React.Component {
 
