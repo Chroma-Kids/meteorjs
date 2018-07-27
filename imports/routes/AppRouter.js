@@ -11,7 +11,7 @@ import { SignupContainer as Signup } from '../ui/Signup';
 import { Dashboard } from '../ui/Dashboard';
 import { NotFound } from '../ui/NotFound';
 import { LoginContainer as Login } from '../ui/Login';
-import { StudentsPage } from '../ui/students/StudentsPage';
+import { StudentsPageContainer as StudentsPage } from '../ui/students/StudentsPage';
 
 export const history = createHistory()
 

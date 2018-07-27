@@ -12,6 +12,7 @@ export class AddStudent extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  // TODO: This method could be in StudentsPage so this wouldn't need to be a container
   onSubmit(values, form, callback) {
     this.props.meteorCall('students.insert', values, (err) => {
       if (err) {
