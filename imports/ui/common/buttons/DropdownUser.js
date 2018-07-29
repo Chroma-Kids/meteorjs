@@ -18,10 +18,10 @@ export class DropdownUser extends React.Component {
             </React.Fragment>}
           noCaret
           id="dropdown-no-caret">
-          <MenuItem>Settings</MenuItem>
-          <MenuItem>Profile</MenuItem>
+          <MenuItem><i className="fas fa-cog"></i>Settings</MenuItem>
+          <MenuItem><i className="fas fa-user"></i>Profile</MenuItem>
           <MenuItem divider />
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          <MenuItem onClick={handleLogout}><i className="fas fa-sign-out-alt"></i>Logout</MenuItem>
         </NavDropdown>
       </div>
     );

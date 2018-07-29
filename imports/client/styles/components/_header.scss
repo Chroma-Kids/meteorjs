@@ -1,17 +1,21 @@
 .header {
-  background: $header-bg;
-  color: $header-color;
-  border-radius: 0;
-  min-height: 0;
-  border-top: none;
-  border-left: none;
-  border-right: none;
+  background: $header-bg !important;
+  color: $header-color !important;
+  border-radius: 0 !important;
+  min-height: 0 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
 }
 
 .header__user {
   display: flex;
   flex-direction: row;
   padding: 1.5rem;
+
+  i {
+    margin: 0 $space; // TODO: Repeated in sidenav.css (extract?)
+  }
 }
 
 .header__user-avatar {
