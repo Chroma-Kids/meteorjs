@@ -1,14 +1,23 @@
 import React from 'react';
-import { HeaderContainer as Header } from '../Header';
+import { Grid, Col } from 'react-bootstrap';
+import { Header } from '../Header';
+import { SideNav } from './Sidenav';
 
 export class DashboardLayout extends React.Component {
   render() {
     return (
       <div>
-        <Header title="Chroma Kids" />
-        <div className="page-content">
-          {this.props.children}
-        </div>
+        <Grid fluid className="dashboard">
+          <Col md={2} className="dashboard__sidenav">
+            <SideNav />
+          </Col>
+          <Col md={10} className="dashboard__main">
+            <Header />
+            <div className="dashboard__content">
+              {this.props.children}
+            </div>
+          </Col>
+        </Grid>
       </div>
     );
   }

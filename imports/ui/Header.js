@@ -1,29 +1,20 @@
 import React from 'react';
-import { Accounts } from 'meteor/accounts-base';
 import PropTypes from 'prop-types';
-import { withTracker } from 'meteor/react-meteor-data';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { DropdownUserContainer as DropdownUser } from './common/buttons/DropdownUser';
 
 export class Header extends React.Component {
   render() {
-    const { title, handleLogout } = this.props;
+    const { title } = this.props;
     return (
-      <div className="header">
-        <div className="header__content">
-          <h1 className="header__title">{title}</h1>
-          <button className="button button--link-text" onClick={handleLogout}>Logout</button>
-        </div>
-      </div>
+      <Navbar fluid className="header">
+        <Nav pullRight>
+          <DropdownUser />
+        </Nav>
+      </Navbar>
     );
   }
 }
 
 Header.propTypes = {
-  title: PropTypes.string.isRequired,
-  handleLogout: PropTypes.func.isRequired,
 };
-
-export const HeaderContainer = withTracker(() => {
-  return {
-    handleLogout: () => Accounts.logout(),
-  };
-})(Header);

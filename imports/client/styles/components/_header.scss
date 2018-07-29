@@ -1,16 +1,26 @@
 .header {
   background: $header-bg;
   color: $header-color;
+  border-radius: 0;
+  min-height: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
 }
 
-.header__content {
+.header__user {
   display: flex;
-  justify-content: space-between;
-  max-width: $site-max-witdh;
-  margin: 0 auto;
-  padding: $space;
+  flex-direction: row;
+  padding: 1.5rem;
 }
 
-.header__title {
-  margin: 0;
+.header__user-avatar {
+  max-height: 3.3rem;
+  max-width: 3.3rem;
+  align-self: center;
+}
+
+.header__user-name {
+  align-self: center;
+  padding-left: 0.75rem;
 }

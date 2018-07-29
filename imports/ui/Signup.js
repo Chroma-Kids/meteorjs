@@ -27,6 +27,7 @@ export class Signup extends React.Component {
       return this.setState({ error: 'Password must be at least 5 characters long.' });
     }
 
+    // TODO: Add firstName and lastName to profile
     this.props.createUser({ email, password }, (err) => {
       if (err) {
         this.setState({ error: err.reason });
