@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactModal from 'react-modal';
+import { Button, Modal as BootstrapModal } from 'react-bootstrap';
 
 export class Modal extends React.Component {
   constructor() {
@@ -8,7 +8,6 @@ export class Modal extends React.Component {
 
     this.state = {
       modalIsOpen: false,
-      appElement: document.getElementById('app'),
     };
 
     this.openModal = this.openModal.bind(this);
@@ -24,23 +23,42 @@ export class Modal extends React.Component {
   }
 
   render() {
-    const { children, buttonText } = this.props;
+    const { children, buttonText, cancelButtonText, successButtonText, title, onCancel, onSuccess, showFooter } = this.props;
     return (
       <div>
-        <button onClick={this.openModal}>{buttonText}</button>
-        <ReactModal
-          appElement={this.state.appElement}
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
+        <Button bsStyle="primary" onClick={this.openModal}>{buttonText}</Button>
+        <BootstrapModal
+          show={this.state.modalIsOpen}
+          onHide={this.closeModal}
         >
-          {children}
-        </ReactModal>
+          <BootstrapModal.Header closeButton>
+            <BootstrapModal.Title id="contained-modal-title-lg">
+              {title}
+            </BootstrapModal.Title>
+          </BootstrapModal.Header>
+          <BootstrapModal.Body>
+            {children}
+          </BootstrapModal.Body>
+          <BootstrapModal.Footer>
+            <Button onClick={onCancel ? onCancel : this.closeModal}>{cancelButtonText}</Button>
+            <Button type="submit" bsStyle="primary" onClick={onSuccess}>{successButtonText}</Button>
+          </BootstrapModal.Footer>
+        </BootstrapModal>
       </div>
     );
   }
 }
 
+Modal.defaultProps = {
+  cancelButtonText: 'Close',
+  successButtonText: 'Save',
+}
+
 Modal.propTypes = {
   buttonText: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  cancelButtonText: PropTypes.string,
+  successButtonText: PropTypes.string,
+  onSuccess: PropTypes.func,
+  onCancel: PropTypes.func,
 }

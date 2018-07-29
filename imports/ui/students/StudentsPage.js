@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
+import ReactTable from "react-table";
 import { Students } from '../../api/students';
 import { AddStudentContainer as AddStudent } from './AddStudent';
 import { Modal } from '../common/Modal';
-import ReactTable from "react-table";
 
 import 'react-table/react-table.css';
 
@@ -21,8 +21,8 @@ const columns = [
 ];
 
 export class StudentsPage extends React.Component {
-
   render() {
+    let submit;
     const { students, loading } = this.props;
 
     if (loading) {
@@ -30,10 +30,13 @@ export class StudentsPage extends React.Component {
     }
 
     return (
-      <div>
-        <Modal buttonText="New Student">
-          <AddStudent />
-        </Modal>
+      <div className="page">
+        <div className="page__header">
+          <h1>Students</h1>
+          <Modal buttonText="New Student" title="Create a new student">
+            <AddStudent />
+          </Modal>
+        </div>
         <div>
           <ReactTable
             data={students}
