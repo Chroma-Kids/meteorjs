@@ -22,7 +22,7 @@ export class FormModal extends React.Component {
 
   closeModal(form) {
     this.setState({ modalIsOpen: false });
-    if (form) { form.reset(); }
+    if (form && form.reset) { form.reset(); }
   }
 
   onSubmit(form, submit) {
@@ -31,7 +31,7 @@ export class FormModal extends React.Component {
       result
         .then(() => {
           this.closeModal();
-          if (form) { form.reset(); }
+          if (form && form.reset) { form.reset(); }
         });
     }
   }
