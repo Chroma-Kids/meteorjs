@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Students } from '../../api/students';
 import { AddStudent } from './AddStudent';
-import { Modal } from '../common/Modal';
+import { Modal } from '../common/modals/Modal';
 
 import 'react-table/react-table.css';
 import { StudentsTable } from './StudentsTable';

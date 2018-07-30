@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactTable from "react-table";
+import ReactTable from 'react-table';
 import { ButtonToolbar, Button } from 'react-bootstrap';
-import { Modal } from '../common/Modal';
+import { Modal } from '../common/modals/Modal';
 import { AddStudent } from './AddStudent';
 
 import 'react-table/react-table.css';
