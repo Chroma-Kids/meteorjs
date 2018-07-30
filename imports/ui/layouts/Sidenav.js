@@ -1,7 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { Image, Button } from 'react-bootstrap';
 
 export class SideNav extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.goTo = this.goTo.bind(this);
+  }
+
+  goTo(route) {
+    const { history } = this.props;
+    history.push(route);
+  }
+
   render() {
     return (
       <div className="sidenav">
@@ -12,9 +25,17 @@ export class SideNav extends React.Component {
           <Button bsStyle="link" block><i className="fas fa-home"></i>Dashboard</Button>
           <Button bsStyle="link" block><i className="fas fa-users"></i>Classes</Button>
           <Button bsStyle="link" block><i className="fas fa-chalkboard-teacher"></i>Teachers</Button>
-          <Button bsStyle="link" block><i className="fas fa-graduation-cap"></i>Students</Button>
+          <Button bsStyle="link" block onClick={() => this.goTo('/students')}><i className="fas fa-graduation-cap"></i>Students</Button>
         </div>
       </div>
     );
   }
 }
+
+SideNav.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
+};
+
+export const SideNavContainer = withRouter(SideNav);

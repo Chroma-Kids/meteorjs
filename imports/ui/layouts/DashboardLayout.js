@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Col } from 'react-bootstrap';
 import { Header } from '../Header';
-import { SideNav } from './Sidenav';
+import { SideNavContainer as SideNav } from './Sidenav';
 
 export class DashboardLayout extends React.Component {
   render() {
