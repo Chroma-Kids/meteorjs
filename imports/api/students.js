@@ -17,12 +17,12 @@ export const Methods = {
       firstName: {
         type: String,
         optional: false,
-        min: 5,
+        min: 1,
       },
       lastName: {
         type: String,
         optional: false,
-        min: 5,
+        min: 1,
       },
     }).validate({ firstName, lastName });
 
@@ -48,6 +48,33 @@ export const Methods = {
 
     Students.remove({ _id });
   },
+  update(_id, updates) {
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized');
+    }
+    const firstName = updates.firstName;
+    const lastName = updates.lastName;
+
+    // TODO: Extract this and have just one validator?
+    new SimpleSchema({
+      _id: {
+        type: String,
+        min: 1,
+      },
+      firstName: {
+        type: String,
+        optional: true,
+      },
+      lastName: {
+        type: String,
+        optional: true,
+      },
+    }).validate({ _id, firstName, lastName });
+
+    Students.update({ _id }, {
+      $set: { updatedAt: moment().valueOf(), firstName, lastName }
+    })
+  }
 }
 
 if (Meteor.isServer) {
@@ -62,4 +89,5 @@ if (Meteor.isServer) {
 Meteor.methods({
   'students.insert': Methods.insert,
   'students.remove': Methods.remove,
+  'students.update': Methods.update,
 });

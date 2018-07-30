@@ -2,27 +2,47 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import ReactTable from "react-table";
 import { Students } from '../../api/students';
-import { AddStudentContainer as AddStudent } from './AddStudent';
+import { AddStudent } from './AddStudent';
 import { Modal } from '../common/Modal';
 
 import 'react-table/react-table.css';
-
-const columns = [
-  {
-    Header: 'First Name',
-    accessor: 'firstName'
-  },
-  {
-    Header: 'Last Name',
-    accessor: 'lastName'
-  }
-];
+import { StudentsTable } from './StudentsTable';
 
 export class StudentsPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.addStudent = this.addStudent.bind(this);
+    this.deleteStudent = this.deleteStudent.bind(this);
+    this.editStudent = this.editStudent.bind(this);
+  }
+
+  addStudent(values, form, callback) {
+    this.props.meteorCall('students.insert', values, (err) => {
+      if (err) {
+        callback({ [err.reason.name]: err.reason.message });
+      } else {
+        callback();
+      }
+    });
+  }
+
+  editStudent(values, form, callback) {
+    this.props.meteorCall('students.update', values._id, values, (err) => {
+      if (err) {
+        callback({ [err.reason.name]: err.reason.message });
+      } else {
+        callback();
+      }
+    });
+  }
+
+  deleteStudent(id) {
+    this.props.meteorCall('students.remove', id);
+  }
+
   render() {
-    let submit;
     const { students, loading } = this.props;
 
     if (loading) {
@@ -34,15 +54,10 @@ export class StudentsPage extends React.Component {
         <div className="page__header">
           <h1>Students</h1>
           <Modal buttonText="New Student" title="Create a new student">
-            <AddStudent />
+            <AddStudent onSubmit={this.addStudent} />
           </Modal>
         </div>
-        <div>
-          <ReactTable
-            data={students}
-            columns={columns}
-          />
-        </div>
+        <StudentsTable students={students} deleteStudent={this.deleteStudent} editStudent={this.editStudent} />
       </div>
     );
   }
@@ -51,6 +66,7 @@ export class StudentsPage extends React.Component {
 StudentsPage.propTypes = {
   students: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
+  meteorCall: PropTypes.func.isRequired,
 }
 
 export const StudentsPageContainer = withTracker(() => {
@@ -58,5 +74,6 @@ export const StudentsPageContainer = withTracker(() => {
   return {
     students: Students.find({}, { sort: { firstName: 1 } }).fetch(),
     loading: !handle.ready(),
+    meteorCall: Meteor.call,
   };
 })(StudentsPage);

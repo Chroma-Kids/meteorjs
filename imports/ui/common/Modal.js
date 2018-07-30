@@ -12,6 +12,7 @@ export class Modal extends React.Component {
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.onSuccess = this.onSuccess.bind(this);
   }
 
   openModal() {
@@ -22,11 +23,16 @@ export class Modal extends React.Component {
     this.setState({ modalIsOpen: false });
   }
 
+  onSuccess() {
+    this.props.onSuccess();
+    this.closeModal();
+  }
+
   render() {
-    const { children, buttonText, cancelButtonText, successButtonText, title, onCancel, onSuccess, showFooter } = this.props;
+    const { children, buttonText, cancelButtonText, successButtonText, title, onCancel, triggerStyle, primaryStyle } = this.props;
     return (
       <div>
-        <Button bsStyle="primary" onClick={this.openModal}>{buttonText}</Button>
+        <Button bsStyle={triggerStyle} onClick={this.openModal}>{buttonText}</Button>
         <BootstrapModal
           show={this.state.modalIsOpen}
           onHide={this.closeModal}
@@ -41,7 +47,7 @@ export class Modal extends React.Component {
           </BootstrapModal.Body>
           <BootstrapModal.Footer>
             <Button onClick={onCancel ? onCancel : this.closeModal}>{cancelButtonText}</Button>
-            <Button type="submit" bsStyle="primary" onClick={onSuccess}>{successButtonText}</Button>
+            <Button type="submit" bsStyle={primaryStyle} onClick={this.onSuccess}>{successButtonText}</Button>
           </BootstrapModal.Footer>
         </BootstrapModal>
       </div>
@@ -52,6 +58,8 @@ export class Modal extends React.Component {
 Modal.defaultProps = {
   cancelButtonText: 'Close',
   successButtonText: 'Save',
+  primaryStyle: 'primary',
+  triggerStyle: 'primary',
 }
 
 Modal.propTypes = {
@@ -61,4 +69,6 @@ Modal.propTypes = {
   successButtonText: PropTypes.string,
   onSuccess: PropTypes.func,
   onCancel: PropTypes.func,
+  primaryStyle: PropTypes.string,
+  triggerStyle: PropTypes.string,
 }
