@@ -10,13 +10,12 @@ export function validate(values) {
   return errors;
 }
 
-export const StudentForm = ({ handleSubmit, pristine, submitError, submitting, hasValidationErrors }) => {
+export const StudentForm = ({ submitError }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <React.Fragment>
       {submitError && <div className="error">{submitError}</div>}
       <Field name="firstName" type="text" placeholder="First Name" />
       <Field name="lastName" type="text" placeholder="Last Name" />
-      <button className="button" type="submit" disabled={pristine || hasValidationErrors || submitting}>Submit</button>
-    </form>
+    </React.Fragment>
   );
 }

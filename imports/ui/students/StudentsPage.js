@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Students } from '../../api/students';
-import { AddStudent } from './AddStudent';
-import { Modal } from '../common/modals/Modal';
+import { StudentsTable } from './StudentsTable';
+import { FormModal } from '../common/modals/FormModal';
+import { StudentForm, validate } from '../students/StudentForm';
 
 import 'react-table/react-table.css';
-import { StudentsTable } from './StudentsTable';
 
 export class StudentsPage extends React.Component {
 
@@ -53,9 +53,12 @@ export class StudentsPage extends React.Component {
       <div className="page">
         <div className="page__header">
           <h1>Students</h1>
-          <Modal buttonText="New Student" title="Create a new student">
-            <AddStudent onSubmit={this.addStudent} />
-          </Modal>
+          <FormModal
+            buttonText="New Student"
+            title="Create a new student"
+            onSubmit={this.addStudent}
+            validate={validate}
+            render={StudentForm} />
         </div>
         <StudentsTable students={students} deleteStudent={this.deleteStudent} editStudent={this.editStudent} />
       </div>
