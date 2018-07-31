@@ -23,7 +23,7 @@ export class SideNav extends React.Component {
         </div>
         <div className="sidenav__menu">
           <Button bsStyle="link" block><i className="fas fa-home"></i>Dashboard</Button>
-          <Button bsStyle="link" block><i className="fas fa-users"></i>Classes</Button>
+          <Button bsStyle="link" block onClick={() => this.goTo('/classrooms')}><i className="fas fa-users"></i>Classrooms</Button>
           <Button bsStyle="link" block onClick={() => this.goTo('/teachers')}><i className="fas fa-chalkboard-teacher"></i>Teachers</Button>
           <Button bsStyle="link" block onClick={() => this.goTo('/students')}><i className="fas fa-graduation-cap"></i>Students</Button>
         </div>

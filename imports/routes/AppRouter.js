@@ -10,6 +10,7 @@ import { NotFound } from '../ui/NotFound';
 import { LoginContainer as Login } from '../ui/Login';
 import { StudentsPageContainer as StudentsPage } from '../ui/students/StudentsPage';
 import { TeachersPageContainer as TeachersPage } from '../ui/teachers/TeachersPage';
+import { ClassroomsPageContainer as ClassroomsPage } from '../ui/classrooms/ClassroomsPage';
 
 export const history = createHistory()
 
@@ -21,6 +22,7 @@ export const AppRouter = () => (
       <PrivateRoute path="/dashboard" component={Dashboard} layout={DashboardLayout} exact={true} />
       <PrivateRoute path="/students" component={StudentsPage} layout={DashboardLayout} exact={true} />
       <PrivateRoute path="/teachers" component={TeachersPage} layout={DashboardLayout} exact={true} />
+      <PrivateRoute path="/classrooms" component={ClassroomsPage} layout={DashboardLayout} exact={true} />
       <Route path="*" component={NotFound} />
     </Switch>
   </Router>
