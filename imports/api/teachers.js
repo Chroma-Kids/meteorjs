@@ -29,6 +29,7 @@ export const Methods = {
     return Teachers.insert({
       firstName,
       lastName,
+      classroom_id: undefined,
       createdBy: { _id: createdBy._id, username: createdBy.username },
       createdAt: moment().valueOf(),
       updatedAt: moment().valueOf(),
@@ -54,6 +55,7 @@ export const Methods = {
     }
     const firstName = updates.firstName;
     const lastName = updates.lastName;
+    const classroom_id = updates.classroom_id;
 
     // TODO: Extract this and have just one validator?
     new SimpleSchema({
@@ -69,10 +71,14 @@ export const Methods = {
         type: String,
         optional: true,
       },
-    }).validate({ _id, firstName, lastName });
+      classroom_id: {
+        type: String,
+        min: 1,
+      },
+    }).validate({ _id, firstName, lastName, classroom_id });
 
     Teachers.update({ _id }, {
-      $set: { updatedAt: moment().valueOf(), firstName, lastName }
+      $set: { updatedAt: moment().valueOf(), firstName, lastName, classroom_id }
     })
   }
 }

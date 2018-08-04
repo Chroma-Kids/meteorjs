@@ -10,7 +10,7 @@ import { LoginContainer as Login } from '../ui/Login';
 import { StudentsPageContainer as StudentsPage } from '../ui/students/StudentsPage';
 import { TeachersPageContainer as TeachersPage } from '../ui/teachers/TeachersPage';
 import { ClassroomsPageContainer as ClassroomsPage } from '../ui/classrooms/ClassroomsPage';
-import { DashboardPage } from '../ui/dashboard/DashboardPage';
+import { DashboardPageContainer as DashboardPage } from '../ui/dashboard/DashboardPage';
 
 export const history = createHistory()
 
