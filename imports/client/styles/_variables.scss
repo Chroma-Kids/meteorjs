@@ -1,37 +1,40 @@
-// Colors
-$brand-primary: #FFF;
-$grey: #DDD;
-$light-grey: #F9F9F9;
-$dark-grey: #777;
+// Basic Colors
+$navy: #1ab394;       // Primary color
+$dark-gray: #c2c2c2;  // Default color
+$blue: #1c84c6;       // Success color
+$lazur: #23c6c8;      // Info color
+$yellow: #f8ac59;     // Warrning color
+$red: #ED5565;        // Danger color
 
-// Spacing
-$space: 1.4rem;
+// Various colors
+$text-color: #676a6c;   // Body text
+$gray: #f3f3f4;         // Background wrapper color
+$light-gray: #D1DADE;   // Default label, badget
+$label-badget-color: #5E5E5E;
+$light-blue:#f3f6fb;
+$color-login-text:#FFF;
 
-// Font sizes
-$base-font-size: 1.6rem;
-$large-font-size: 1.8rem;
+// Spiner color and margin
+$spin-color: $navy;
+$spin-margin: 0 auto;
 
-// Form inputs
-$input-border: $grey;
-$input-spacing: 1rem;
 
-// Boxed view
-$boxed-view-overlay-bg: $grey;
-$boxed-view-bg: #FFF;
+// IBOX colors ( default panel colors)
+$border-color: #e7eaec;     // IBox border
+$ibox-title-bg:#ffffff;     // IBox Background header
+$ibox-content-bg:#ffffff;   // IBox Background content
 
-// Button
-$button-bg: $brand-primary;
-$button-color: #FFF;
-$button-pill-color: $brand-primary;
-$button-secondary-bg: $light-grey;
-$button-secondary-color: $dark-grey;
-$button-secondary-border-color: $grey;
+//Sidebar width
+$sidebar-width: 220px;
 
-// Header
-$header-bg: $brand-primary;
-$header-color: #FFF;
+// Boxed layout width
+$boxed-width: 1200px;
+$boxed-backgound: url('patterns/shattered.png');
 
-// Item
-$item-bg: $light-grey;
-$item-border: darken($item-bg, 8%);
-$item-color: $dark-grey;
+//Border radius for buttons
+$btn-border-radius: 3px;
+
+//Navigation
+$nav-bg: #2F4050;
+$nav-profil-pattern: url("patterns/header-profile.png");
+$nav-text-color: #a7b1c2;
