@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal as BootstrapModal } from 'react-bootstrap';
 import { Form } from 'react-final-form';
+import { Toolbar } from '../Toolbar';
+
 
 export class FormModal extends React.Component {
   constructor() {
@@ -50,7 +52,11 @@ export class FormModal extends React.Component {
       primaryStyle } = this.props;
     return (
       <div>
-        <Button bsStyle={triggerStyle} onClick={this.openModal}>{buttonText}</Button>
+        <Toolbar
+            title={"Classrooms"}
+            breadcrumb={['Dashboard']}
+            button={this.openModal}
+            buttonText={"New classroom"} />
         <Form
           onSubmit={onSubmit}
           initialValues={initialValues}
