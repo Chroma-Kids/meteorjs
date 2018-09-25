@@ -6,6 +6,8 @@ import { Classrooms } from '../../api/classrooms';
 import { ClassroomsTable } from './ClassroomsTable';
 import { FormModal } from '../common/modals/FormModal';
 import { Toolbar } from '../common/Toolbar';
+import { List } from '../common/List';
+import { ListItemClassroom } from './ListItemClassroom';
 import { ClassroomForm, validate } from './ClassroomForm';
 
 import 'react-table/react-table.css';
@@ -75,7 +77,11 @@ export class ClassroomsPage extends React.Component {
               </div>
           </div>
           :
-          <ClassroomsTable classrooms={classrooms} deleteClassroom={this.deleteClassroom} editClassroom={this.editClassroom} />
+          <List {...this.props} className={ "classrooms" } >
+           {_.map(classrooms, (classroom, key) =>
+               <ListItemClassroom {...this.props} key={key} itemKey={key} classroom={classroom} />
+            )}
+          </List>
         )}
       </div>
     );
