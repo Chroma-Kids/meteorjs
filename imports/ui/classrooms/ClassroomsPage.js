@@ -67,8 +67,6 @@ export class ClassroomsPage extends React.Component {
           validate={validate}
           render={ClassroomForm} />
 
-
-
         {(loading ?
           <div className="spiner-example">
               <div className="sk-spinner sk-spinner-double-bounce">
@@ -79,7 +77,7 @@ export class ClassroomsPage extends React.Component {
           :
           <List {...this.props} className={ "classrooms" } >
            {_.map(classrooms, (classroom, key) =>
-               <ListItemClassroom {...this.props} key={key} itemKey={key} classroom={classroom} />
+               <ListItemClassroom {...this.props} key={key} itemKey={key} classroom={classroom} deleteClassroom={this.deleteClassroom}  />
             )}
           </List>
         )}

@@ -30,7 +30,7 @@ export const ListItemClassroom = (props) => {
         <td className="project-actions">
             <Link to={'sd'} className="btn btn-success btn-sm"><i className="fa fa-cross"></i> Edit </Link>
             <button onClick={() => {
-              deleteClassroom(itemKey)
+              deleteClassroom(classroom._id)
             }} className="btn btn-danger btn-sm"><i className="fa fa-cross"></i> Delete </button>
         </td>
     </tr>
