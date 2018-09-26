@@ -5,6 +5,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Students } from '../../api/students';
 import { StudentsTable } from './StudentsTable';
 import { FormModal } from '../common/modals/FormModal';
+import { List } from '../common/List';
+import { ListItemStudent } from './ListItemStudent';
 import { StudentForm, validate } from '../students/StudentForm';
 
 import 'react-table/react-table.css';
@@ -45,22 +47,29 @@ export class StudentsPage extends React.Component {
   render() {
     const { students, loading } = this.props;
 
-    if (loading) {
-      return (<h1>Loading...</h1>);
-    }
-
     return (
-      <div className="page">
-        <div className="page__header">
-          <h1>Students</h1>
-          <FormModal
-            buttonText="New Student"
-            title="Create a new student"
-            onSubmit={this.addStudent}
-            validate={validate}
-            render={StudentForm} />
-        </div>
-        <StudentsTable students={students} deleteStudent={this.deleteStudent} editStudent={this.editStudent} />
+      <div key="homeView">
+        <FormModal
+          buttonText="New Student"
+          title="Add a new student"
+          onSubmit={this.addStudent}
+          validate={validate}
+          render={StudentForm} />
+
+        {(loading ?
+          <div className="spiner-example">
+              <div className="sk-spinner sk-spinner-double-bounce">
+                  <div className="sk-double-bounce1"></div>
+                  <div className="sk-double-bounce2"></div>
+              </div>
+          </div>
+          :
+          <List {...this.props} className={ "students" } >
+           {_.map(students, (student, key) =>
+               <ListItemStudent {...this.props} key={key} itemKey={key} student={student} editStudent={this.editStudent} deleteStudent={this.deleteStudent}  />
+            )}
+          </List>
+        )}
       </div>
     );
   }

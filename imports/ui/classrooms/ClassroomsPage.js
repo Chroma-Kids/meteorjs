@@ -77,36 +77,13 @@ export class ClassroomsPage extends React.Component {
           :
           <List {...this.props} className={ "classrooms" } >
            {_.map(classrooms, (classroom, key) =>
-               <ListItemClassroom {...this.props} key={key} itemKey={key} classroom={classroom} deleteClassroom={this.deleteClassroom}  />
+               <ListItemClassroom {...this.props} key={key} itemKey={key} classroom={classroom} editClassroom={this.editClassroom} deleteClassroom={this.deleteClassroom}  />
             )}
           </List>
         )}
       </div>
     );
   }
-
-  // render() {
-  //   const { classrooms, loading } = this.props;
-  //
-  //   if (loading) {
-  //     return (<h1>Loading...</h1>);
-  //   }
-  //
-  //   return (
-  //     <div className="page">
-  //       <div className="page__header">
-  //         <h1>Classroom</h1>
-  //         <FormModal
-  //           buttonText="New Classroom"
-  //           title="Create a new classroom"
-  //           onSubmit={this.addClassroom}
-  //           validate={validate}
-  //           render={ClassroomForm} />
-  //       </div>
-  //       <ClassroomsTable classrooms={classrooms} deleteClassroom={this.deleteClassroom} editClassroom={this.editClassroom} />
-  //     </div>
-  //   );
-  // }
 }
 
 ClassroomsPage.propTypes = {
