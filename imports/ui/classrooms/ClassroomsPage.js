@@ -62,7 +62,7 @@ export class ClassroomsPage extends React.Component {
       <div key="homeView">
         <FormModal
           buttonText="New Classroom"
-          title="Create a new classroom"
+          title="Classrooms"
           onSubmit={this.addClassroom}
           validate={validate}
           render={ClassroomForm} />

@@ -53,10 +53,10 @@ export class FormModal extends React.Component {
     return (
       <div>
         <Toolbar
-            title={"Classrooms"}
+            title={title}
             breadcrumb={['Dashboard']}
             button={this.openModal}
-            buttonText={"New classroom"} />
+            buttonText={buttonText} />
         <Form
           onSubmit={onSubmit}
           initialValues={initialValues}

@@ -5,7 +5,9 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Teachers } from '../../api/teachers';
 import { TeachersTable } from './TeachersTable';
 import { FormModal } from '../common/modals/FormModal';
+import { ListItemTeacher } from './ListItemTeacher';
 import { TeacherForm, validate } from './TeacherForm';
+import { List } from '../common/List';
 
 import 'react-table/react-table.css';
 
@@ -28,7 +30,6 @@ export class TeachersPage extends React.Component {
     });
   }
 
-  // TODO: Merge add and edit?
   editTeacher(values, form, callback) {
     this.props.meteorCall('teachers.update', values._id, values, (err) => {
       if (err) {
@@ -46,22 +47,29 @@ export class TeachersPage extends React.Component {
   render() {
     const { teachers, loading } = this.props;
 
-    if (loading) {
-      return (<h1>Loading...</h1>);
-    }
-
     return (
-      <div className="page">
-        <div className="page__header">
-          <h1>Teachers</h1>
-          <FormModal
-            buttonText="New Teacher"
-            title="Create a new teacher"
-            onSubmit={this.addTeacher}
-            validate={validate}
-            render={TeacherForm} />
-        </div>
-        <TeachersTable teachers={teachers} deleteTeacher={this.deleteTeacher} editTeacher={this.editTeacher} />
+      <div key="homeView">
+        <FormModal
+          buttonText="New Teacher"
+          title="Teachers"
+          onSubmit={this.addTeacher}
+          validate={validate}
+          render={TeacherForm} />
+
+        {(loading ?
+          <div className="spiner-example">
+              <div className="sk-spinner sk-spinner-double-bounce">
+                  <div className="sk-double-bounce1"></div>
+                  <div className="sk-double-bounce2"></div>
+              </div>
+          </div>
+          :
+          <List {...this.props} className={ "students" } >
+           {_.map(teachers, (teacher, key) =>
+              <ListItemTeacher {...this.props} key={key} itemKey={key} teacher={teacher} editTeacher={this.editTeacher} deleteTeacher={this.deleteTeacher}  />
+            )}
+          </List>
+        )}
       </div>
     );
   }
