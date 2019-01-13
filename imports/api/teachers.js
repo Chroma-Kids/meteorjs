@@ -82,7 +82,7 @@ export const Methods = {
     })
   },
   // moveTeacherToClassroom(source.getItem().teacherId, source.getItem().classroomId, props.classroomId, source.getItem().recording)
-  moveTeacherToClassroom(source_teacher_id, source_classroom_id, dest_classroom_id) {
+  moveTeacherToClassroom(teacher_id, source_classroom_id, dest_classroom_id) {
 
   }
 }

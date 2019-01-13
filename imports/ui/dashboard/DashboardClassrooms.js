@@ -50,7 +50,13 @@ class DashboardClassrooms extends React.Component {
                         </div>*/}
 
                         <ClassroomDrop classroomId={key}>
-                          console.log(classroom)
+                          {(typeof classroom.teachers !== "undefined" ?
+                            this.renderTeachersClassroom(classroom.teachers, key)
+                            :
+                            <div className="alert alert-warning">
+                                No teachers assigned to this classroom.
+                            </div>
+                          )}
                         </ClassroomDrop>
                     </div>
                 </div>

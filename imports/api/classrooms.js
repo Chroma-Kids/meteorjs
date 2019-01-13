@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import moment from 'moment';
 import SimpleSchema from 'simpl-schema';
+import { Teacher } from './teachers';
+
 
 export const Classrooms = new Mongo.Collection('classrooms');
 
@@ -29,6 +31,10 @@ export const Methods = {
         type: SimpleSchema.Integer,
         optional: false,
         min: 0,
+      },
+      teachers: {
+        type: Teacher,
+        optional: true,
       }
     }).validate({ name, description, ratio: parsedRatio });
 
