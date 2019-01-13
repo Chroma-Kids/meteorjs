@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp'
-import { FormModal } from './FormModal';
+import { FormModal } from '../common/FormModal';
 import { StudentForm, validate } from './StudentForm';
 
 export const ListItemStudent = (props) => {

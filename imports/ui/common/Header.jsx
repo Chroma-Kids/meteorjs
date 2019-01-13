@@ -28,7 +28,7 @@ export class Header extends React.Component {
                 <ul className="nav navbar-top-links navbar-right">
                     <li>
                         <a onClick={() => {this.props.logout()}}>
-                            <i className="fa fa-sign-out"></i> Log out
+                            <i className="fa fa-sign-out"></i> Logout
                         </a>
                     </li>
                 </ul>

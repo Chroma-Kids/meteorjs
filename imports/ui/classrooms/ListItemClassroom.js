@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp'
-import { FormModal } from './FormModal';
+import { FormModal } from '../common/FormModal';
 import { ClassroomForm, validate } from '../classrooms/ClassroomForm';
 
 export const ListItemClassroom = (props) => {
@@ -29,18 +29,19 @@ export const ListItemClassroom = (props) => {
             <a href=""><img alt="imagecircle" className="img-circle" src="img/a6.jpg"/></a>
             <a href=""><img alt="imagecircle" className="img-circle" src="img/a3.jpg"/></a>
         </td>
+
         <td className="project-actions">
-            <FormModal
-              buttonText="Edit"
-              successButtonText="Edit"
-              cancelButtonText="Cancel"
-              title="Edit classroom"
-              triggerStyle="success"
-              primaryStyle="success"
-              initialValues={classroom}
-              onSubmit={editClassroom}
-              validate={validate}
-              render={ClassroomForm} />
+          <FormModal
+            buttonText="Edit"
+            successButtonText="Edit"
+            cancelButtonText="Cancel"
+            title="Edit classroom"
+            triggerStyle="success"
+            primaryStyle="success"
+            initialValues={classroom}
+            onSubmit={editClassroom}
+            validate={validate}
+            render={ClassroomForm} />
 
             <button onClick={() => {
               deleteClassroom(classroom._id)

@@ -80,6 +80,10 @@ export const Methods = {
     Teachers.update({ _id }, {
       $set: { updatedAt: moment().valueOf(), firstName, lastName, classroom_id }
     })
+  },
+  // moveTeacherToClassroom(source.getItem().teacherId, source.getItem().classroomId, props.classroomId, source.getItem().recording)
+  moveTeacherToClassroom(source_teacher_id, source_classroom_id, dest_classroom_id) {
+
   }
 }
 
@@ -96,4 +100,5 @@ Meteor.methods({
   'teachers.insert': Methods.insert,
   'teachers.remove': Methods.remove,
   'teachers.update': Methods.update,
+  'teachers.moveTeacherToClassroom': Methods.moveTeacherToClassroom,
 });
