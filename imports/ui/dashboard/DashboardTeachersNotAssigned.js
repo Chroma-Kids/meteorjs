@@ -26,9 +26,7 @@ class DashboardTeachersNotAssigned extends React.Component {
 
   render() {
 
-    const { teachersnotassigned, teachers } = this.props;
-
-    console.log(teachers);
+    const { teachersNotAssigned, teachers } = this.props;
 
     return (
       <div className="row">
@@ -38,10 +36,10 @@ class DashboardTeachersNotAssigned extends React.Component {
             <ClassroomDrop className="alert alert-info m-n">
               {
                 (typeof teachers !== "undefined" &&
-                typeof teachersnotassigned !== "undefined" &&
-                teachersnotassigned != null
+                typeof teachersNotAssigned !== "undefined" &&
+                teachersNotAssigned != null
                 ?
-                  this.renderTeachersNotAssigned(teachersnotassigned)
+                  this.renderTeachersNotAssigned(teachersNotAssigned)
                 :
                 <div className="alert alert-warning m-n">No teachers having a break.</div>
               )}
