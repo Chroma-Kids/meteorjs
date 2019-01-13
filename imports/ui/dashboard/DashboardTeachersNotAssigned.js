@@ -4,38 +4,48 @@ import _ from 'lodash';
 import TeacherDrag from './dragdropteacher/Dragteacher'
 import ClassroomDrop from './dragdropteacher/Dropclassroom'
 
-export class DashboardTeachersNotAssigned extends React.Component {
+class DashboardTeachersNotAssigned extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.state = { enableRecordingTrajectory: false }
+    this.state = { enableRecordingTrajectory: false }
   }
 
-  // renderTeachersNotAssigned(teachersNotAssigned){
-  //   return _.map(Object.keys(teachersNotAssigned), key => {
-  //     return (
-  //       <TeacherDrag
-  //         text={this.props.teachers[key].name}
-  //         key={key}
-  //         teacherId={key}
-  //         recording={this.state.enableRecordingTrajectory}
-  //       />
-  //     )
-  //   })
-  // }
+  renderTeachersNotAssigned(teachersNotAssigned){
+    return _.map(Object.keys(teachersNotAssigned), key => {
+      return (
+        <TeacherDrag
+          text={this.props.teachers[key].name}
+          key={key}
+          teacherId={key}
+          recording={this.state.enableRecordingTrajectory}
+        />
+      )
+    })
+  }
 
   render() {
 
-    // const { teachersnotassigned, teachers } = this.props;
+    const { teachersnotassigned, teachers } = this.props;
+
+    console.log(teachers);
 
     return (
       <div className="row">
         <div className="col-lg-12 m-t">
           <div className="ibox-content">
             <h3>Teachers having a break</h3>
-            <ul className="sortable-list connectList agile-list ui-sortable">
-              <li>dsd</li>
-            </ul>
+            <ClassroomDrop className="alert alert-info m-n">
+              {
+                (typeof teachers !== "undefined" &&
+                typeof teachersnotassigned !== "undefined" &&
+                teachersnotassigned != null
+                ?
+                  this.renderTeachersNotAssigned(teachersnotassigned)
+                :
+                <div className="alert alert-warning m-n">No teachers having a break.</div>
+              )}
+            </ClassroomDrop>
           </div>
         </div>
       </div>
@@ -43,4 +53,4 @@ export class DashboardTeachersNotAssigned extends React.Component {
   }
 }
 
-//  default DashboardTeachersNotAssigned;
+export default DashboardTeachersNotAssigned;
