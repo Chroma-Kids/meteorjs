@@ -11,17 +11,22 @@ class DashboardTeachersNotAssigned extends React.Component {
     this.state = { enableRecordingTrajectory: false }
   }
 
-  renderTeachersNotAssigned(teachersNotAssigned){
-    return _.map(Object.keys(teachersNotAssigned), key => {
-      return (
-        <TeacherDrag
-          text={this.props.teachers[key].name}
-          key={key}
-          teacherId={key}
-          recording={this.state.enableRecordingTrajectory}
-        />
-      )
-    })
+  renderTeachersNotAssigned(teachersNotAssigned, teachers){
+
+    // console.log(Object.values(teachersNotAssigned));
+    // console.log(teachersNotAssigned);
+
+    for (var variable in teachersNotAssigned) {
+        console.log(variable);
+    }
+
+    // return _.map(Object.values(teachersNotAssigned), (teacher, key) =>
+    //   <TeacherDrag
+    //     text={teachers[teacher.teacherId].firstName}
+    //     key={key}
+    //     teacherId={key}
+    //   />
+    // )
   }
 
   render() {
@@ -39,7 +44,7 @@ class DashboardTeachersNotAssigned extends React.Component {
                 typeof teachersNotAssigned !== "undefined" &&
                 teachersNotAssigned != null
                 ?
-                  this.renderTeachersNotAssigned(teachersNotAssigned)
+                  this.renderTeachersNotAssigned(teachersNotAssigned, teachers)
                 :
                 <div className="alert alert-warning m-n">No teachers having a break.</div>
               )}

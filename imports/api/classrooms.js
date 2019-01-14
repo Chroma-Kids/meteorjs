@@ -31,10 +31,6 @@ export const Methods = {
         type: SimpleSchema.Integer,
         optional: false,
         min: 0,
-      },
-      teachers: {
-        type: Teacher,
-        optional: true,
       }
     }).validate({ name, description, ratio: parsedRatio });
 

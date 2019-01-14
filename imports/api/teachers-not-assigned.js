@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import moment from 'moment';
 import SimpleSchema from 'simpl-schema';
 
-export const TeachersNotAssigned = new Mongo.Collection('teachers-not-assigned');
+export const TeachersNotAssigned = new Mongo.Collection('teachers_not_assigned');
 
 export const Methods = {
   insert({ firstName, lastName }) {
@@ -14,23 +14,15 @@ export const Methods = {
     const createdBy = Meteor.user();
 
     new SimpleSchema({
-      firstName: {
+      teacherId: {
         type: String,
         optional: false,
         min: 1,
-      },
-      lastName: {
-        type: String,
-        optional: false,
-        min: 1,
-      },
+      }
     }).validate({ firstName, lastName });
 
     return TeachersNotAssigned.insert({
-      firstName,
-      lastName,
-      classroom_id: undefined,
-      createdBy: { _id: createdBy._id, username: createdBy.username },
+      teacherId,
       createdAt: moment().valueOf(),
       updatedAt: moment().valueOf(),
     });
@@ -63,22 +55,14 @@ export const Methods = {
         type: String,
         min: 1,
       },
-      firstName: {
+      teacherId: {
         type: String,
         optional: true,
-      },
-      lastName: {
-        type: String,
-        optional: true,
-      },
-      classroom_id: {
-        type: String,
-        min: 1,
       },
     }).validate({ _id, firstName, lastName, classroom_id });
 
     TeachersNotAssigned.update({ _id }, {
-      $set: { updatedAt: moment().valueOf(), firstName, lastName, classroom_id }
+      $set: { updatedAt: moment().valueOf(), teacherId }
     })
   }
 }
@@ -88,7 +72,7 @@ if (Meteor.isServer) {
     if (!this.userId) {
       return [];
     }
-    return Teachers.find();
+    return TeachersNotAssigned.find();
   });
 }
 

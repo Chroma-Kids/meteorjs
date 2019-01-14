@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import moment from 'moment';
 import SimpleSchema from 'simpl-schema';
+import { TeachersNotAssigned } from './teachers-not-assigned';
 
 export const Teachers = new Mongo.Collection('teachers');
 
@@ -26,7 +27,7 @@ export const Methods = {
       },
     }).validate({ firstName, lastName });
 
-    return Teachers.insert({
+    teacherId = Teachers.insert({
       firstName,
       lastName,
       classroom_id: undefined,
@@ -34,6 +35,14 @@ export const Methods = {
       createdAt: moment().valueOf(),
       updatedAt: moment().valueOf(),
     });
+
+    TeachersNotAssigned.insert({
+      teacherId,
+      createdAt: moment().valueOf(),
+      updatedAt: moment().valueOf(),
+    });
+
+    return teacherId;
   },
   remove(_id) {
     if (!this.userId) {
