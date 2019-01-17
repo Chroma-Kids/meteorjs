@@ -47,6 +47,8 @@ export class TeachersPage extends React.Component {
   render() {
     const { teachers, loading } = this.props;
 
+    console.log(teachers);
+
     return (
       <div key="homeView">
         <FormModal

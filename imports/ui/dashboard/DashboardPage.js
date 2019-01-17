@@ -57,12 +57,11 @@ DashboardPage.propTypes = {
 export const DashboardPageContainer = withTracker(() => {
   const handleClassrooms = Meteor.subscribe('classrooms.all');
   const handleTeachers = Meteor.subscribe('teachers.all');
-  const handleTeachersNotAssigned = Meteor.subscribe('teachers-not-assigned.all');
   return {
     // TODO: Join classrooms and teachers here or in render?
     classrooms: Classrooms.find().fetch(),
     teachers: Teachers.find().fetch(),
-    teachersNotAssigned: TeachersNotAssigned.find().fetch(),
+    teachersNotAssigned: Teachers.find({ status: "NOT_ASSIGNED" }).fetch(),
     loading: !handleClassrooms.ready() && !handleTeachers.ready(),
     // meteorCall: Meteor.call,
   };

@@ -1,18 +1,18 @@
 import React from 'react';
 import _ from 'lodash';
 
-import TeacherDrag from './dragdropteacher/Dragteacher'
+import TeacherDrag from './dragdropteacher/Dragteacher0'
 import ClassroomDrop from './dragdropteacher/Dropclassroom'
 import { Link } from 'react-router-dom';
 
 class DashboardClassrooms extends React.Component {
 
-
     renderTeachersClassroom(teachersKey, classroomKey){
-      return _.map(Object.keys(teachersKey), key => {
+
+      return _.map(teachersKey, key => {
         return (
           <TeacherDrag
-            text={this.props.teachers[key].name}
+            text={this.props.teachers.find(x => x._id === key).firstName}
             key={key}
             teacherId={key}
             classroomId={classroomKey}
@@ -42,20 +42,14 @@ class DashboardClassrooms extends React.Component {
                         For instance creating incidents for this classroom direclty.</p>
                         <p className="small"><i className="fa fa-hand-o-up"></i> Drag teachers between classrooms</p>
 
-                        {/*<div className="input-group">
-                            <input type="text" placeholder="Add new teacher " className="input input-sm form-control"/>
-                            <span className="input-group-btn">
-                                    <button type="button" className="btn btn-sm btn-white"> <i className="fa fa-plus"></i> Add teacher</button>
-                            </span>
-                        </div>*/}
-
                         <ClassroomDrop classroomId={key}>
-                          {(typeof classroom.teachers !== "undefined" ?
-                            this.renderTeachersClassroom(classroom.teachers, key)
+                          {(typeof classroom.teachers !== "undefined"
+                            ?
+                              this.renderTeachersClassroom(classroom.teachers, key)
                             :
-                            <div className="alert alert-warning">
-                                No teachers assigned to this classroom.
-                            </div>
+                              <div className="alert alert-warning">
+                                  No teachers assigned to this classroom.
+                              </div>
                           )}
                         </ClassroomDrop>
                     </div>

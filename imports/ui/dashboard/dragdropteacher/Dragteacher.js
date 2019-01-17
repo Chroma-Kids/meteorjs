@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 import { Link } from 'react-router-dom';
-// import { ROUTES } from '../../index';
 
 const Types = {
   TEACHER: 'teacher'
@@ -44,6 +43,9 @@ const propTypes = {
 class TeacherDrag extends Component {
   render() {
     const { isDragging, connectDragSource, text, key, teacherId } = this.props;
+
+    console.log("TeacherDrag");
+
     return connectDragSource(
       <li style={{ opacity: isDragging ? 0.5 : 1 }} key={key} className="warning-element" >
           <Link to={ROUTES.AUTHENTICATED.TEACHER(teacherId)}>{text}</Link>

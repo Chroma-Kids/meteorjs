@@ -31,7 +31,14 @@ export const Methods = {
         type: SimpleSchema.Integer,
         optional: false,
         min: 0,
-      }
+      },
+      teachers: {
+        type: Array,
+        optional: true,
+      },
+      'teachers.$': {
+          type: String
+      },
     }).validate({ name, description, ratio: parsedRatio });
 
     return Classrooms.insert({

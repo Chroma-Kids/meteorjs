@@ -31,13 +31,8 @@ export const Methods = {
       firstName,
       lastName,
       classroom_id: undefined,
+      status: "NOT_ASSIGNED",
       createdBy: { _id: createdBy._id, username: createdBy.username },
-      createdAt: moment().valueOf(),
-      updatedAt: moment().valueOf(),
-    });
-
-    TeachersNotAssigned.insert({
-      teacherId,
       createdAt: moment().valueOf(),
       updatedAt: moment().valueOf(),
     });

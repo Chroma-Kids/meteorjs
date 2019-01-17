@@ -57,7 +57,7 @@ class ClassroomDrop extends Component {
 ClassroomDrop.propTypes = propTypes;
 
 
-export default flow(
-  DropTarget(Types.TEACHER, listTarget, collect),
+export default
+  DropTarget(Types.TEACHER, listTarget, collect)
   // connect(null, { moveTeacherToClassroom })
-)(ClassroomDrop);
+(ClassroomDrop);
