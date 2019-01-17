@@ -2,9 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import moment from 'moment';
 import SimpleSchema from 'simpl-schema';
-import { TeachersNotAssigned } from './teachers-not-assigned';
 
-export const Teachers = new Mongo.Collection('teachers');
+export const TeachersNotAssigned = new Mongo.Collection('teachers_not_assigned');
 
 export const Methods = {
   insert({ firstName, lastName }) {
@@ -15,29 +14,18 @@ export const Methods = {
     const createdBy = Meteor.user();
 
     new SimpleSchema({
-      firstName: {
+      teacherId: {
         type: String,
         optional: false,
         min: 1,
-      },
-      lastName: {
-        type: String,
-        optional: false,
-        min: 1,
-      },
+      }
     }).validate({ firstName, lastName });
 
-    teacherId = Teachers.insert({
-      firstName,
-      lastName,
-      classroom_id: undefined,
-      status: "NOT_ASSIGNED",
-      createdBy: { _id: createdBy._id, username: createdBy.username },
+    return TeachersNotAssigned.insert({
+      teacherId,
       createdAt: moment().valueOf(),
       updatedAt: moment().valueOf(),
     });
-
-    return teacherId;
   },
   remove(_id) {
     if (!this.userId) {
@@ -51,7 +39,7 @@ export const Methods = {
       }
     }).validate({ _id });
 
-    Teachers.remove({ _id });
+    TeachersNotAssigned.remove({ _id });
   },
   update(_id, updates) {
     if (!this.userId) {
@@ -67,42 +55,29 @@ export const Methods = {
         type: String,
         min: 1,
       },
-      firstName: {
+      teacherId: {
         type: String,
         optional: true,
-      },
-      lastName: {
-        type: String,
-        optional: true,
-      },
-      classroom_id: {
-        type: String,
-        min: 1,
       },
     }).validate({ _id, firstName, lastName, classroom_id });
 
-    Teachers.update({ _id }, {
-      $set: { updatedAt: moment().valueOf(), firstName, lastName, classroom_id }
+    TeachersNotAssigned.update({ _id }, {
+      $set: { updatedAt: moment().valueOf(), teacherId }
     })
-  },
-  // moveTeacherToClassroom(source.getItem().teacherId, source.getItem().classroomId, props.classroomId, source.getItem().recording)
-  moveTeacherToClassroom(teacher_id, source_classroom_id, dest_classroom_id) {
-
   }
 }
 
 if (Meteor.isServer) {
-  Meteor.publish('teachers.all', function () {
+  Meteor.publish('teachers-not-assigned.all', function () {
     if (!this.userId) {
       return [];
     }
-    return Teachers.find();
+    return TeachersNotAssigned.find();
   });
 }
 
 Meteor.methods({
-  'teachers.insert': Methods.insert,
-  'teachers.remove': Methods.remove,
-  'teachers.update': Methods.update,
-  'teachers.moveTeacherToClassroom': Methods.moveTeacherToClassroom,
+  'teachers-not-assigned.insert': Methods.insert,
+  'teachers-not-assigned.remove': Methods.remove,
+  'teachers-not-assigned.update': Methods.update
 });

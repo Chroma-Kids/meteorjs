@@ -4,36 +4,52 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Classrooms } from '../../api/classrooms';
 import { Teachers } from '../../api/teachers';
+import { TeachersNotAssigned } from '../../api/teachers-not-assigned';
+import { Link } from 'react-router-dom';
+import ToolbarDashboard from '../common/ToolbarDashboard'
+import DashboardTeachersNotAssigned from './DashboardTeachersNotAssigned'
+import DashboardClassrooms from './DashboardClassrooms'
 
 export class DashboardPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { enableRecordingTrajectory: false }
+  }
+
+  toggleMenu(){
+    this.setState({
+      enableRecordingTrajectory: !this.state.enableRecordingTrajectory
+    });
+  }
+
+
   render() {
-    const { classrooms, teachers } = this.props;
+
+    const { enableRecordingTrajectory } = this.state;
+
     return (
-      <div className="page">
-        {classrooms.map(classroom => (
-          <div key={classroom._id}>
-            <h4>{classroom.name}</h4>
-            <h5>{classroom.description}</h5>
-            <p>Ratio: {classroom.ratio}</p>
-          </div>
-        ))
-        }
-        <div>
-          <h4>Unassigned teachers</h4>
-          {teachers.filter(teacher => !teacher.classroom_id).map(teacher => (
-            <div key={teacher._id}>
-              <p>{`${teacher.firstName} ${teacher.lastName}`}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
+      <div key="homeView">
+
+        <ToolbarDashboard
+          button={this.toggleMenu.bind(this)}
+          buttonText={(this.state.enableRecordingTrajectory ? "Recording..." : "Testing")}
+          title={"Dashboard"} />
+
+        <DashboardTeachersNotAssigned
+          {...this.props}
+        />
+        <DashboardClassrooms
+            {...this.props}
+            enableRecordingTrajectory={enableRecordingTrajectory}
+          />
+      </div>);
   }
 }
 
 DashboardPage.propTypes = {
   classrooms: PropTypes.array.isRequired,
   teachers: PropTypes.array.isRequired,
+  teachersNotAssigned: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   // meteorCall: PropTypes.func.isRequired,
 }
@@ -45,6 +61,7 @@ export const DashboardPageContainer = withTracker(() => {
     // TODO: Join classrooms and teachers here or in render?
     classrooms: Classrooms.find().fetch(),
     teachers: Teachers.find().fetch(),
+    teachersNotAssigned: Teachers.find({ status: "NOT_ASSIGNED" }).fetch(),
     loading: !handleClassrooms.ready() && !handleTeachers.ready(),
     // meteorCall: Meteor.call,
   };
